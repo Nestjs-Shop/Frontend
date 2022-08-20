@@ -5,7 +5,7 @@ const FloatingLabelInput: React.FC<FloatingLabelInputType> = (props) => {
   const [focused, setFocused] = React.useState<boolean>(false);
 
   return (
-    <div className='relative flex flex-col'>
+    <div className='relative flex flex-col max-w-full'>
       <label
         htmlFor={props.id}
         className={`absolute z-10 right-3 cursor-text ${
@@ -43,15 +43,15 @@ const FloatingLabelInput: React.FC<FloatingLabelInputType> = (props) => {
         onFocus={() => {
           setFocused(true);
         }}
-        className={`h-[30px] py-2 px-4 border ${
+        className={`max-w-full h-[30px] py-2 px-4 border ${
           focused
-            ? props.errors.emailOrPhone
+            ? props.errors[props.name] && props.isTouched
               ? 'border-b-red-500 caret-red-500'
               : 'border-b-cyan-500 caret-cyan-500'
             : 'border-b-gray-200'
         }  border-transparent outline-none w-[300px]  text-sm text-gray-800`}
       />
-      {props.errors.emailOrPhone && (
+      {props.errors[props.name] && props.isTouched && (
         <span className='mt-2 text-red-500 text-2xs'>
           {props.errors[props.name]?.message}
         </span>
